@@ -1,0 +1,289 @@
+diff --git a/node_modules/@strapi/admin/admin/src/components/AuthenticatedApp/utils/api.js b/node_modules/@strapi/admin/admin/src/components/AuthenticatedApp/utils/api.js
+index fab3208..ee3712b 100644
+--- a/node_modules/@strapi/admin/admin/src/components/AuthenticatedApp/utils/api.js
++++ b/node_modules/@strapi/admin/admin/src/components/AuthenticatedApp/utils/api.js
+@@ -15,18 +15,18 @@ const fetchStrapiLatestRelease = async toggleNotification => {
+     const shouldUpdateStrapi = checkLatestStrapiVersion(strapiVersion, tag_name);
+ 
+     if (shouldUpdateStrapi && showUpdateNotif) {
+-      toggleNotification({
+-        type: 'info',
+-        message: { id: 'notification.version.update.message' },
+-        link: {
+-          url: `https://github.com/strapi/strapi/releases/tag/${tag_name}`,
+-          label: {
+-            id: 'global.see-more',
+-          },
+-        },
+-        blockTransition: true,
+-        onClose: () => localStorage.setItem('STRAPI_UPDATE_NOTIF', true),
+-      });
++      // toggleNotification({
++      //   type: 'info',
++      //   message: { id: 'notification.version.update.message' },
++      //   link: {
++      //     url: `https://github.com/strapi/strapi/releases/tag/${tag_name}`,
++      //     label: {
++      //       id: 'global.see-more',
++      //     },
++      //   },
++      //   blockTransition: true,
++      //   onClose: () => localStorage.setItem('STRAPI_UPDATE_NOTIF', true),
++      // });
+     }
+ 
+     return tag_name;
+diff --git a/node_modules/@strapi/admin/admin/src/components/LeftMenu/index.js b/node_modules/@strapi/admin/admin/src/components/LeftMenu/index.js
+index dc2606b..547a6f2 100644
+--- a/node_modules/@strapi/admin/admin/src/components/LeftMenu/index.js
++++ b/node_modules/@strapi/admin/admin/src/components/LeftMenu/index.js
+@@ -39,7 +39,7 @@ const LinkUser = styled(RouterNavLink)`
+ 
+   &:hover {
+     background: ${({ theme, logout }) =>
+-      logout ? theme.colors.danger100 : theme.colors.primary100};
++    logout ? theme.colors.danger100 : theme.colors.primary100};
+     text-decoration: none;
+   }
+ 
+@@ -127,7 +127,8 @@ const LeftMenu = ({ generalSectionLinks, pluginsSectionLinks }) => {
+                 <NavLink
+                   as={RouterNavLink}
+                   badgeContent={
+-                    (link.notificationsCount > 0 && link.notificationsCount.toString()) || undefined
++                    undefined
++                    // (link.notificationsCount > 0 && link.notificationsCount.toString()) || undefined
+                   }
+                   to={link.to}
+                   key={link.to}
+@@ -184,13 +185,13 @@ const LeftMenu = ({ generalSectionLinks, pluginsSectionLinks }) => {
+       <NavCondense onClick={() => setCondensed(s => !s)}>
+         {condensed
+           ? formatMessage({
+-              id: 'app.components.LeftMenu.expand',
+-              defaultMessage: 'Expand the navbar',
+-            })
++            id: 'app.components.LeftMenu.expand',
++            defaultMessage: 'Expand the navbar',
++          })
+           : formatMessage({
+-              id: 'app.components.LeftMenu.collapse',
+-              defaultMessage: 'Collapse the navbar',
+-            })}
++            id: 'app.components.LeftMenu.collapse',
++            defaultMessage: 'Collapse the navbar',
++          })}
+       </NavCondense>
+     </MainNav>
+   );
+diff --git a/node_modules/@strapi/admin/admin/src/hooks/useMenu/reducer.js b/node_modules/@strapi/admin/admin/src/hooks/useMenu/reducer.js
+index f697d3d..b02f821 100644
+--- a/node_modules/@strapi/admin/admin/src/hooks/useMenu/reducer.js
++++ b/node_modules/@strapi/admin/admin/src/hooks/useMenu/reducer.js
+@@ -7,24 +7,24 @@ import adminPermissions from '../../permissions';
+ 
+ const initialState = {
+   generalSectionLinks: [
+-    {
+-      icon: Puzzle,
+-      intlLabel: {
+-        id: 'global.plugins',
+-        defaultMessage: 'Plugins',
+-      },
+-      to: '/list-plugins',
+-      permissions: adminPermissions.marketplace.main,
+-    },
+-    {
+-      icon: ShoppingCart,
+-      intlLabel: {
+-        id: 'global.marketplace',
+-        defaultMessage: 'Marketplace',
+-      },
+-      to: '/marketplace',
+-      permissions: adminPermissions.marketplace.main,
+-    },
++    // {
++    //   icon: Puzzle,
++    //   intlLabel: {
++    //     id: 'global.plugins',
++    //     defaultMessage: 'Plugins',
++    //   },
++    //   to: '/list-plugins',
++    //   permissions: adminPermissions.marketplace.main,
++    // },
++    // {
++    //   icon: ShoppingCart,
++    //   intlLabel: {
++    //     id: 'global.marketplace',
++    //     defaultMessage: 'Marketplace',
++    //   },
++    //   to: '/marketplace',
++    //   permissions: adminPermissions.marketplace.main,
++    // },
+     {
+       icon: Cog,
+       intlLabel: {
+diff --git a/node_modules/@strapi/admin/admin/src/hooks/useReleaseNotification/index.js b/node_modules/@strapi/admin/admin/src/hooks/useReleaseNotification/index.js
+index 556e42f..262ff88 100644
+--- a/node_modules/@strapi/admin/admin/src/hooks/useReleaseNotification/index.js
++++ b/node_modules/@strapi/admin/admin/src/hooks/useReleaseNotification/index.js
+@@ -9,18 +9,18 @@ const useReleaseNotification = () => {
+ 
+   useEffect(() => {
+     if (shouldUpdateStrapi && showUpdateNotif) {
+-      toggleNotification({
+-        type: 'info',
+-        message: { id: 'notification.version.update.message' },
+-        link: {
+-          url: `https://github.com/strapi/strapi/releases/tag/${latestStrapiReleaseTag}`,
+-          label: {
+-            id: 'global.see-more',
+-          },
+-        },
+-        blockTransition: true,
+-        onClose: () => localStorage.setItem('STRAPI_UPDATE_NOTIF', true),
+-      });
++      // toggleNotification({
++      //   type: 'info',
++      //   message: { id: 'notification.version.update.message' },
++      //   link: {
++      //     url: `https://github.com/strapi/strapi/releases/tag/${latestStrapiReleaseTag}`,
++      //     label: {
++      //       id: 'global.see-more',
++      //     },
++      //   },
++      //   blockTransition: true,
++      //   onClose: () => localStorage.setItem('STRAPI_UPDATE_NOTIF', true),
++      // });
+     }
+   }, [latestStrapiReleaseTag, shouldUpdateStrapi, toggleNotification]);
+ 
+diff --git a/node_modules/@strapi/admin/admin/src/hooks/useSettingsMenu/init.js b/node_modules/@strapi/admin/admin/src/hooks/useSettingsMenu/init.js
+index 451704a..3ba021e 100644
+--- a/node_modules/@strapi/admin/admin/src/hooks/useSettingsMenu/init.js
++++ b/node_modules/@strapi/admin/admin/src/hooks/useSettingsMenu/init.js
+@@ -44,7 +44,28 @@ const init = (initialState, { settings, shouldUpdateStrapi }) => {
+     ...otherSections,
+   ];
+ 
+-  return { ...initialState, menu: formatLinks(menu) };
++  const updatedMenu = menu.map(menuItem => {
++    let linksToRemove = []
++    switch (menuItem.id) {
++      case "global":
++        linksToRemove = ["000-application-infos", "api-tokens", "internationalization", "media-library-settings"]
++        break;
++      case "permissions":
++        linksToRemove = []
++        break;
++      case "email":
++        linksToRemove = ["settings"]
++        break;
++      case "users-permissions":
++        linksToRemove = ["providers", "email-templates", "advanced"]
++        break;
++      default:
++        return { ...menuItem };
++    }
++    return { ...menuItem, links: menuItem.links.filter(elem => !linksToRemove.includes(elem.id)) };
++  })
++
++  return { ...initialState, menu: formatLinks(updatedMenu) };
+ };
+ 
+ export default init;
+diff --git a/node_modules/@strapi/admin/admin/src/pages/Admin/index.js b/node_modules/@strapi/admin/admin/src/pages/Admin/index.js
+index 14c9594..1b18bf3 100644
+--- a/node_modules/@strapi/admin/admin/src/pages/Admin/index.js
++++ b/node_modules/@strapi/admin/admin/src/pages/Admin/index.js
+@@ -80,12 +80,12 @@ const Admin = () => {
+             {routes}
+             <Route path="/settings/:settingId" component={SettingsPage} />
+             <Route path="/settings" component={SettingsPage} exact />
+-            <Route path="/marketplace">
++            {/* <Route path="/marketplace">
+               <MarketplacePage />
+             </Route>
+             <Route path="/list-plugins" exact>
+               <InstalledPluginsPage />
+-            </Route>
++            </Route> */}
+             <Route path="/404" component={NotFoundPage} />
+             <Route path="/500" component={InternalErrorPage} />
+             <Route path="" component={NotFoundPage} />
+diff --git a/node_modules/@strapi/admin/admin/src/pages/HomePage/HomeHeader.js b/node_modules/@strapi/admin/admin/src/pages/HomePage/HomeHeader.js
+index a846220..3a08528 100644
+--- a/node_modules/@strapi/admin/admin/src/pages/HomePage/HomeHeader.js
++++ b/node_modules/@strapi/admin/admin/src/pages/HomePage/HomeHeader.js
+@@ -35,7 +35,7 @@ const HomeHeader = ({ hasCreatedContentType, onCreateCT }) => {
+                   defaultMessage: 'Welcome on board!',
+                 })}
+           </Typography>
+-          <WordWrap textColor="neutral600" variant="epsilon">
++          {/* <WordWrap textColor="neutral600" variant="epsilon">
+             {hasCreatedContentType
+               ? formatMessage({
+                   id: 'app.components.HomePage.welcomeBlock.content.again',
+@@ -47,8 +47,8 @@ const HomeHeader = ({ hasCreatedContentType, onCreateCT }) => {
+                   defaultMessage:
+                     'Congrats! You are logged as the first administrator. To discover the powerful features provided by Strapi, we recommend you to create your first Content type!',
+                 })}
+-          </WordWrap>
+-          {hasCreatedContentType ? (
++          </WordWrap> */}
++          {/* {hasCreatedContentType ? (
+             <Link isExternal href="https://strapi.io/blog">
+               {formatMessage({
+                 id: 'app.components.HomePage.button.blog',
+@@ -62,7 +62,7 @@ const HomeHeader = ({ hasCreatedContentType, onCreateCT }) => {
+                 defaultMessage: 'Create your first Content type',
+               })}
+             </Button>
+-          )}
++          )} */}
+         </StackCustom>
+       </Box>
+     </div>
+diff --git a/node_modules/@strapi/admin/admin/src/pages/HomePage/index.js b/node_modules/@strapi/admin/admin/src/pages/HomePage/index.js
+index f8b8d85..915fd4c 100644
+--- a/node_modules/@strapi/admin/admin/src/pages/HomePage/index.js
++++ b/node_modules/@strapi/admin/admin/src/pages/HomePage/index.js
+@@ -75,14 +75,14 @@ const HomePage = () => {
+               />
+             </GridItem>
+           </Grid>
+-          <Grid gap={6}>
++          {/* <Grid gap={6}>
+             <GridItem col={8} s={12}>
+               {showGuidedTour ? <GuidedTourHomepage /> : <ContentBlocks />}
+             </GridItem>
+             <GridItem col={4} s={12}>
+               <SocialLinks />
+             </GridItem>
+-          </Grid>
++          </Grid> */}
+         </Box>
+       </Main>
+     </Layout>
+diff --git a/node_modules/@strapi/admin/admin/src/pages/SettingsPage/index.js b/node_modules/@strapi/admin/admin/src/pages/SettingsPage/index.js
+index 35a48d5..4b94670 100644
+--- a/node_modules/@strapi/admin/admin/src/pages/SettingsPage/index.js
++++ b/node_modules/@strapi/admin/admin/src/pages/SettingsPage/index.js
+@@ -43,7 +43,7 @@ function SettingsPage() {
+   }
+ 
+   if (!settingId) {
+-    return <Redirect to="/settings/application-infos" />;
++    return <Redirect to="/settings/roles" />;
+   }
+ 
+   const settingTitle = formatMessage({
+@@ -56,7 +56,7 @@ function SettingsPage() {
+       <Helmet title={settingTitle} />
+ 
+       <Switch>
+-        <Route path="/settings/application-infos" component={ApplicationInfosPage} exact />
++        {/* <Route path="/settings/application-infos" component={ApplicationInfosPage} exact /> */}
+         {adminRoutes}
+         {pluginsRoutes}
+       </Switch>

@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_uses",
+  "info": {
+    "singularName": "contact-us",
+    "pluralName": "contact-uses",
+    "displayName": "ContactUS",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "Email": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "Message": {
+      "type": "text",
+      "required": false
+    },
+    "Subject": {
+      "type": "text"
+    }
+  }
+}
